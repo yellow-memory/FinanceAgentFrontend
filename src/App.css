@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  display: flex;
+}
+
+.sidebar {
+  width: 100%; /* Full width by default */
+  max-width: 280px; /* Limit max width */
+  background-color: #d9d9d9;
+  height: 100vh; /* Full height of the viewport */
+  box-sizing: border-box; /* Include padding in the element's total width and height */
+  padding: 10px; /* Adjust padding for content spacing */
+}
+
+.merge-button {
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.merge-options {
+  display: flex;
+  gap: 10px;
+}
+
+.merge-options > div > button {
+  background-color: #d9d9d9!important
+}
+
+.chat-box {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #888;
+}
+
+.sidebar-li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  cursor: pointer; /* Make it look clickable */
+  padding: 5px 10px;
+  border-radius: 8px; /* Rounded border */
+  text-decoration: none; /* Remove underline */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-li:hover {
+  background-color: #ba99e3; /* Hover color */
+  color: #fff; /* Text color on hover */
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Full width on smaller screens */
+    height: auto; /* Adjust height to fit content */
+  }
+
+  .sidebar h1 {
+    font-size: 1.3em; /* Smaller font size */
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .sidebar li {
+    padding: 5px 8px;
+  }
+
+  .upgrade-section {
+    max-width: 100%; /* Allow full width on smaller screens */
+  }
+}
+
+.insights-modal {
+  word-wrap: break-word; /* Ensure long words break onto the next line */
+  word-break: break-word; /* Break long words */
+  white-space: pre-wrap;  /* Preserve whitespace and wrap text */
+  max-height: 80vh;       /* Limit the height of modal content */
+  overflow-y: auto;       /* Add a scrollbar if content overflows */
+}
+
+/* Add this in your CSS file */
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 8px solid #3498db;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.modal-dialog {
+  max-width: 90%; /* Set modal width to 90% of screen width */
+}
+
+.modal-header, .modal-footer {
+  width: 100%;
+}
+
+.table {
+  table-layout: fixed; /* Ensures the table stays within defined width */
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+th, td {
+  padding: 8px;
+  white-space: normal;
+  border: 1px solid #ddd;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+}
+
+th {
+  background-color: #f4f4f4;
+}
