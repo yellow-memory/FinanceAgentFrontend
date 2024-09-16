@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c4444fd7.css",
+    "main.js": "/static/js/main.e97ed8b4.js",
+    "static/media/rectangle-list-solid.svg": "/static/media/rectangle-list-solid.964c8208be5cea8349bc67064a86cfbb.svg",
+    "static/media/chart-simple-solid.svg": "/static/media/chart-simple-solid.ded1b12026195392625f86a32daefd4e.svg",
+    "index.html": "/index.html",
+    "static/media/1.svg": "/static/media/1.d690533b4940615b2bd4a4c7d7718c77.svg",
+    "static/media/mynaui--dots-circle.svg": "/static/media/mynaui--dots-circle.d33858b800242a04875392a247911dff.svg",
+    "static/media/flowbite--chart-mixed-outline.svg": "/static/media/flowbite--chart-mixed-outline.c627a1b853401b45bb6aefd3489c9885.svg",
+    "main.c4444fd7.css.map": "/static/css/main.c4444fd7.css.map",
+    "main.e97ed8b4.js.map": "/static/js/main.e97ed8b4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c4444fd7.css",
+    "static/js/main.e97ed8b4.js"
+  ]
+}
