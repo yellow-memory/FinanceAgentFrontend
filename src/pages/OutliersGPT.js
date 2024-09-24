@@ -27,6 +27,7 @@ function OutliersGPT() {
                 }
             });
             setLoading(false)
+            setError(null)
 
             setOutliers(response.data.outliers)
             console.log(typeof(response.data.outliers))

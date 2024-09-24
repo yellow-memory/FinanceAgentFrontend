@@ -26,6 +26,7 @@ function InsightsGPT() {
                 }
             });
             setLoading(false)
+            setError(null)
 
             setInsights(response.data.insights);
             setShowModal(true);  // Show modal when we get the insights
@@ -60,6 +61,7 @@ function InsightsGPT() {
                 }
             });
             setLoading(false)
+            setError(null)
 
             setInsights(response.data.kpis);
             setShowModal(true);  // Show modal when we get the insights
@@ -94,6 +96,7 @@ function InsightsGPT() {
                 }
             });
             setLoading(false)
+            setError(null)
 
             setInsights(response.data.key_drivers);
             setShowModal(true);  // Show modal when we get the insights

@@ -28,6 +28,7 @@ function DataCleaningGPT() {
                 }
             });
             setLoading(false)
+            setError(null)
 
             setCleanedData(response.data.cleaned_data)
             setShowModal(true)

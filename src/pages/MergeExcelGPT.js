@@ -35,6 +35,7 @@ function MergeExcelGPT() {
                 }
             });
             setLoading(false)
+            setError(null)
             setMerged(response.data.merge_result)
             setShowModal(true)
         } catch (error) {
