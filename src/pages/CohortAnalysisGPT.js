@@ -75,9 +75,11 @@ function CohortAnalysisGPT() {
         document.body.removeChild(element);
     };
 
+    const gptName = "Cohort Analysis GPT";
+
     return (
         <div className="main-content" style={{ height: '100vh', minHeight: "800px" }}>
-            <h2 style={{ marginTop:'70px', textAlign: 'left', fontSize: '1.8vw' }}>Cohort Analysis GPT</h2>
+            <h2 style={{ marginTop:'4%', textAlign: 'left', fontSize: '1.8vw' }}>Cohort Analysis GPT</h2>
             {/* {(image && <img src={image} alt="Cohort Analysis Result" style={{ width: '100%', maxHeight: '50vh', objectFit: 'contain' }} />)} */}
 
             <div className="merge-options" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto', marginBottom: '20px' }}>
@@ -136,7 +138,7 @@ function CohortAnalysisGPT() {
             </div>
 
             {error && <div className="error-message" style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>{error}</div>}
-            <ChatBox />
+            <ChatBox gptName={gptName}/>
             <Footer />
 
             {/* Modal */}

@@ -124,6 +124,8 @@ function InsightsGPT() {
         document.body.removeChild(element);
     };
 
+    const gptName = "Insights GPT"
+
     return (
         <div className="main-content" style={{height:'100vh', minHeight: "800px"}}>
             <h2 style={{ marginTop:'4%', textAlign: 'left', fontSize: '1.8vw' }}>Insights GPT</h2>
@@ -209,7 +211,7 @@ function InsightsGPT() {
 
 
             {error && <div className="error-message" style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>{error}</div>}
-            <ChatBox />
+            <ChatBox gptName={gptName}/>
             <Footer />
         </div>
     );

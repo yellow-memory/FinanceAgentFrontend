@@ -59,6 +59,7 @@ function OutliersGPT() {
         XLSX.writeFile(wb, '/outliers_result.xlsx'); 
     };
 
+    const gptName = "Outliers GPT";
 
     return (
         <div className="main-content" style={{height:'100vh', minHeight: "800px"}}>
@@ -148,7 +149,7 @@ function OutliersGPT() {
 
 
             {error && <div className="error-message" style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>{error}</div>}
-            <ChatBox />
+            <ChatBox gptName={gptName}/>
             <Footer />
         </div>
     );

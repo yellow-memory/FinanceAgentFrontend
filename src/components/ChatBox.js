@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ChatBox() {
+function ChatBox({gptName}) {
     return (
         <div style={{ marginTop: '10px', width: '100%', display: 'flex', justifyContent: 'center', marginLeft:'auto', marginRight:'auto'}}>
             <button
@@ -15,7 +15,7 @@ function ChatBox() {
                     backgroundColor: '#d9d9d9'
                 }}
             >
-                Chat with Merge Excel GPT
+                Chat with {gptName}
             </button>
         </div>
     );

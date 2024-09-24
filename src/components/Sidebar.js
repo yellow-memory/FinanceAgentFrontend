@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ReactComponent as MyIcon } from '../assets/icons/1.svg';
 import { ReactComponent as ChartIcon } from '../assets/icons/chart-simple-solid.svg';
@@ -24,29 +25,29 @@ function Sidebar() {
                     FinanceAgents
                 </h2>
                 <ul style={{ 
-                    marginTop: '3%', 
+                    marginTop: '10%', 
                     listStyleType: 'none', 
                     lineHeight: '2.5em', 
                     paddingInlineStart: '15%' 
                 }}>
                     <li className='sidebar-li'>
-                        <MyIcon width="20" height="20" style={{ marginRight: '10px' }} />
+                        <MyIcon width="20" height="20" style={{ marginRight: '7%' }} />
                         <Link to="/merge-excel" style={{textDecoration:'none'}}>Merge Excel GPT</Link>
                     </li>
                     <li className='sidebar-li'>
-                        <ChartIcon width="20" height="20" style={{ marginRight: '10px' }} />
+                        <ChartIcon width="20" height="20" style={{ marginRight: '7%' }} />
                         <Link to="/insights" style={{textDecoration:'none'}}>Insights GPT</Link>
                     </li>
                     <li className='sidebar-li'>
-                        <ListIcon width="20" height="20" style={{ marginRight: '10px' }} />
+                        <ListIcon width="20" height="20" style={{ marginRight: '7%' }} />
                         <Link to="/data-cleaning" style={{textDecoration:'none'}}>Data Cleaning GPT</Link>
                     </li>
                     <li className='sidebar-li'>
-                        <MixedChartIcon width="20" height="20" style={{ marginRight: '10px' }} />
+                        <MixedChartIcon width="20" height="20" style={{ marginRight: '7%' }} />
                         <Link to="/cohort-analysis" style={{textDecoration:'none'}}>Cohort Analysis GPT</Link>
                     </li>
                     <li className='sidebar-li'>
-                        <CircleIcon width="20" height="20" style={{ marginRight: '10px' }} />
+                        <CircleIcon width="20" height="20" style={{ marginRight: '7%' }} />
                         <Link to="/outliers" style={{textDecoration:'none'}}>Outliers GPT</Link>
                     </li>
                 </ul>
@@ -63,7 +64,7 @@ function Sidebar() {
                     marginBottom: '5%'
                 }}
             >
-                <StarIcon width="2vw" height="2vw" style={{ marginBottom: '10px' }} />
+                <StarIcon width="2vw" height="2vw" style={{ marginBottom: '10px', marginLeft: '8vw' }} />
                 <p style={{ fontSize: '1.2vw', marginBottom: '10px', lineHeight: '1.5em' }}>
                     Upgrade to<br />
                     <span style={{ display: 'block', marginTop: '10px' }}>
