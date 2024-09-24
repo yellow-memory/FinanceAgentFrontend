@@ -60,8 +60,8 @@ function DataCleaningGPT() {
     };
 
     return (
-        <div className="main-content" style={{height:'100vh'}}>
-            <h1 style={{ margin: '70px 50px 0 50px', textAlign: 'left' }}>Data Cleaning GPT</h1>
+        <div className="main-content" style={{height:'100vh', minHeight: "800px"}}>
+            <h2 style={{ marginTop:'70px', textAlign: 'left' }}>Data Cleaning GPT</h2>
 
             <div className="merge-options" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto', marginBottom: '20px' }}>
             {loading ? (
@@ -124,30 +124,16 @@ function DataCleaningGPT() {
                     multiple
                     onChange={handleFileChange}
                 />
-                <div style={{ display: 'flex', gap: '80px', width: '100%', maxWidth: '1200px' }}>
+                <div style={{ display: 'flex', gap: '5%', width: '100%'}}>
                     <button
                         onClick={() => document.getElementById('file-input').click()}
-                        style={{
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none'
-                        }}
+                        className='uploadButton'
                     >
                         Clean this Excel dataset
                     </button>
                     <button
                         onClick={() => document.getElementById('file-input').click()}
-                        style={{                            
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none'
-                        }}
+                        className='uploadButton'
                     >
                         I have missing values and
                         duplicate entries in my
@@ -155,14 +141,7 @@ function DataCleaningGPT() {
                     </button>
                     <button
                         onClick={() => document.getElementById('file-input').click()}
-                        style={{
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none'
-                        }}
+                        className='uploadButton'
                     >
                         My dataset has
                         inconsistent date

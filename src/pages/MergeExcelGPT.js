@@ -65,8 +65,8 @@ function MergeExcelGPT() {
     };
 
     return (
-        <div className="main-content" style={{height:'100vh'}}>
-            <h1 style={{ margin: '70px 50px 0 50px', textAlign: 'left' }}>Merge Excel GPT</h1>
+        <div className="main-content" style={{height:'100vh', minHeight: "800px"}}>
+            <h2 style={{ marginTop:'70px', textAlign: 'left' }}>Merge Excel GPT</h2>
 
             <div className="merge-options" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto', marginBottom: '20px' }}>
             {loading ? (
@@ -129,43 +129,22 @@ function MergeExcelGPT() {
                     multiple
                     onChange={handleFileChange}
                 />
-                <div style={{ display: 'flex', gap: '80px', width: '100%', maxWidth: '1200px' }}>
+                <div style={{ display: 'flex', gap: '5%', width: '100%'}}>
                     <button
                         onClick={() => document.getElementById('file-input').click()}
-                        style={{
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none'
-                        }}
+                        className='uploadButton'
                     >
                         I want to merge 2 files with same structure
                     </button>
                     <button
                         onClick={() => document.getElementById('file-input').click()}
-                        style={{                            
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none'
-                        }}
+                        className='uploadButton'
                     >
                         I want to merge 2 files with different structure
                     </button>
                     <button
                         onClick={() => document.getElementById('file-input').click()}
-                        style={{
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none'
-                        }}
+                        className='uploadButton'
                     >
                         I want a complex merge (I'll help you!)
                     </button>

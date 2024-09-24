@@ -31,6 +31,7 @@ function InsightsGPT() {
             setInsights(response.data.insights);
             setShowModal(true);  // Show modal when we get the insights
         } catch (error) {
+            setLoading(false)
             if (error.response) {
                 // Server responded with a status other than 2xx
                 setError(`Server Error: ${error.response.data.error}`);
@@ -63,6 +64,7 @@ function InsightsGPT() {
             setInsights(response.data.kpis);
             setShowModal(true);  // Show modal when we get the insights
         } catch (error) {
+            setLoading(false)
             if (error.response) {
                 // Server responded with a status other than 2xx
                 setError(`Server Error: ${error.response.data.error}`);
@@ -86,7 +88,7 @@ function InsightsGPT() {
 
         try {
             setLoading(true)
-            const response = await axios.post('http://127.0.0.1:5000/sales-keydrivers', formData, {
+            const response = await axios.post('http://10.220.161.209:10000/sales-keydrivers', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -96,6 +98,7 @@ function InsightsGPT() {
             setInsights(response.data.key_drivers);
             setShowModal(true);  // Show modal when we get the insights
         } catch (error) {
+            setLoading(false)
             if (error.response) {
                 // Server responded with a status other than 2xx
                 setError(`Server Error: ${error.response.data.error}`);
@@ -121,8 +124,8 @@ function InsightsGPT() {
     };
 
     return (
-        <div className="main-content" style={{height:'100vh'}}>
-            <h1 style={{ margin: '70px 50px 0 50px', textAlign: 'left' }}>Insights GPT</h1>
+        <div className="main-content" style={{height:'100vh', minHeight: "800px"}}>
+            <h2 style={{ marginTop:'70px', textAlign: 'left' }}>Insights GPT</h2>
 
             <div className="merge-options" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto', marginBottom: '20px' }}>
                 {loading ? (
@@ -172,17 +175,10 @@ function InsightsGPT() {
                     onChange={handleKeydriversFileChange}
                 />
                  
-                <div style={{ display: 'flex', gap: '80px', width: '100%', maxWidth: '1200px' }}>
+                <div style={{ display: 'flex', gap: '5%', width: '100%'}}>
                     <button
                         onClick={() => document.getElementById('insights-input').click()}
-                        style={{
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none'
-                        }}
+                        className='uploadButton'
                     >
                         I have a dataset of
                         customer purchase
@@ -192,14 +188,7 @@ function InsightsGPT() {
                     </button>
                     <button
                         onClick={() => document.getElementById('kpi-input').click()}
-                        style={{                            
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none'
-                        }}
+                        className='uploadButton'
                     >
                         What are the top KPIs I
                         should focus on from my
@@ -207,14 +196,7 @@ function InsightsGPT() {
                     </button>
                     <button
                         onClick={() => document.getElementById('keydrivers-input').click()}
-                        style={{
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none'
-                        }}
+                        className='uploadButton'
                     >
                         Identify the key drivers
                         behind my company's

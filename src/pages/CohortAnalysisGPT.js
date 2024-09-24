@@ -76,8 +76,8 @@ function CohortAnalysisGPT() {
     };
 
     return (
-        <div className="main-content" style={{ height: '100vh' }}>
-            <h1 style={{ margin: '70px 50px 0 50px', textAlign: 'left' }}>Cohort Analysis GPT</h1>
+        <div className="main-content" style={{ height: '100vh', minHeight: "800px" }}>
+            <h2 style={{ marginTop:'70px', textAlign: 'left' }}>Cohort Analysis GPT</h2>
             {/* {(image && <img src={image} alt="Cohort Analysis Result" style={{ width: '100%', maxHeight: '50vh', objectFit: 'contain' }} />)} */}
 
             <div className="merge-options" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto', marginBottom: '20px' }}>
@@ -111,17 +111,10 @@ function CohortAnalysisGPT() {
                     multiple
                     onChange={handleFileChange}
                 />
-                <div style={{ display: 'flex', gap: '80px', width: '100%', maxWidth: '1200px' }}>
+                <div style={{ display: 'flex', gap: '5%', width: '100%'}}>
                     <button
                         onClick={() => setShowExampleModal(true)}
-                        style={{
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none',
-                        }}
+                        className='uploadButton'
                     >
                         I want to know what data structure to upload
                     </button>
@@ -129,27 +122,13 @@ function CohortAnalysisGPT() {
                         onClick={() => {
                             document.getElementById('file-input').click();
                         }}
-                        style={{
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none',
-                        }}
+                        className='uploadButton'
                     >
                         I want a quick cohort analysis on variable...
                     </button>
                     <button
                         onClick={() => document.getElementById('file-input').click()}
-                        style={{
-                            height: '100px',
-                            borderRadius: '10px',
-                            width: '100%',
-                            maxWidth: '350px',
-                            fontSize: 'larger',
-                            border: 'none',
-                        }}
+                        className='uploadButton'
                     >
                         I want a complex merge (I'll help you!)
                     </button>

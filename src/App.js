@@ -13,7 +13,7 @@ function App() {
         <Router>
             <div style={{ display: 'flex' }}>
                 <Sidebar />
-                <div style={{ flex: 1}}>
+                <div style={{ flex: 1, paddingLeft: "30px", paddingRight: "30px"}}>
                     <Routes>
                         <Route path="/merge-excel" element={<MergeExcelGPT />} />
                         <Route path="/insights" element={<InsightsGPT />} />

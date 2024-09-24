@@ -12,6 +12,7 @@ function Sidebar() {
             display: 'flex', 
             flexDirection: 'column', 
             height: '100vh', 
+            minHeight: "800px",
             fontFamily: 'Arial, sans-serif', 
             padding: '10px', 
             boxSizing: 'border-box' 

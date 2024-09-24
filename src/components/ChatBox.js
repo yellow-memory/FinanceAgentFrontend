@@ -2,13 +2,13 @@ import React from 'react';
 
 function ChatBox() {
     return (
-        <div style={{ marginTop: '10px', width: '100%', maxWidth: '1200px', display: 'flex', justifyContent: 'center', marginLeft:'auto', marginRight:'auto'}}>
+        <div style={{ marginTop: '10px', width: '100%', display: 'flex', justifyContent: 'center', marginLeft:'auto', marginRight:'auto'}}>
             <button
                 style={{
                     height: '100px',
                     borderRadius: '10px',
                     width: '100%',
-                    fontSize: 'larger',
+                    fontSize: '1.5vw',
                     border: 'none',
                     textAlign: 'left',
                     paddingLeft: '40px',

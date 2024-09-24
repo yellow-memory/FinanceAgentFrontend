@@ -7,7 +7,6 @@ function Footer() {
             style={{
                 marginTop: '10px',
                 width: '100%', 
-                maxWidth: '1200px', 
                 display: 'flex', 
                 justifyContent: 'space-between', 
                 marginLeft: 'auto', 
