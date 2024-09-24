@@ -22,7 +22,7 @@ function DataCleaningGPT() {
 
         try {
             setLoading(true)
-            const response = await axios.post('http://127.0.0.1:5000/clean-dataset', formData, {
+            const response = await axios.post('https://testagent1-eb208e96c27e.herokuapp.com/clean-dataset', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

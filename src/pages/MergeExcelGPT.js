@@ -29,7 +29,7 @@ function MergeExcelGPT() {
 
         try {
             setLoading(true)
-            const response = await axios.post('http://127.0.0.1:5000/merge-excel', formData, {
+            const response = await axios.post('https://testagent1-eb208e96c27e.herokuapp.com/merge-excel', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

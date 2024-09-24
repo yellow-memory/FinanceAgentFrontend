@@ -9,6 +9,7 @@
 /coverage
 
 /backend
+/.venv
 
 # misc
 .DS_Store

@@ -4,7 +4,6 @@ import ChatBox from '../components/ChatBox';
 import Footer from '../components/Footer';
 import { Modal, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import * as XLSX from 'xlsx';
 
 function InsightsGPT() {
     const [error, setError] = useState(null);
@@ -21,7 +20,7 @@ function InsightsGPT() {
 
         try {
             setLoading(true)
-            const response = await axios.post('http://127.0.0.1:5000/sales-insights', formData, {
+            const response = await axios.post('https://testagent1-eb208e96c27e.herokuapp.com/sales-insights', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -43,6 +42,7 @@ function InsightsGPT() {
                 setError(`Request Error: ${error.message}`);
             }
         }
+        e.target.value = null;
     };
 
     const handleKPIFileChange = async (e) => {
@@ -54,7 +54,7 @@ function InsightsGPT() {
 
         try {
             setLoading(true)
-            const response = await axios.post('http://127.0.0.1:5000/sales-kpis', formData, {
+            const response = await axios.post('https://testagent1-eb208e96c27e.herokuapp.com/sales-kpis', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -88,7 +88,7 @@ function InsightsGPT() {
 
         try {
             setLoading(true)
-            const response = await axios.post('http://10.220.161.209:10000/sales-keydrivers', formData, {
+            const response = await axios.post('https://testagent1-eb208e96c27e.herokuapp.com/sales-keydrivers', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -110,6 +110,7 @@ function InsightsGPT() {
                 setError(`Request Error: ${error.message}`);
             }
         }
+        e.target.value = null;
     };
 
     const downloadResult = (result) => {
