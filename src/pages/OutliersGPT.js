@@ -62,7 +62,7 @@ function OutliersGPT() {
 
     return (
         <div className="main-content" style={{height:'100vh', minHeight: "800px"}}>
-            <h2 style={{ marginTop:'70px', textAlign: 'left' }}>Outliers GPT</h2>
+            <h2 style={{ marginTop:'4%', textAlign: 'left', fontSize: '1.8vw' }}>Outliers GPT</h2>
 
             <div className="merge-options" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto', marginBottom: '20px' }}>
                 {loading ? (

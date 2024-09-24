@@ -8,12 +8,11 @@ body {
 }
 
 .sidebar {
-  width: 100%; /* Full width by default */
-  max-width: 280px; /* Limit max width */
+  width: 20%;
   background-color: #d9d9d9;
-  height: 100vh; /* Full height of the viewport */
-  box-sizing: border-box; /* Include padding in the element's total width and height */
-  padding: 10px; /* Adjust padding for content spacing */
+  height: 100vh; 
+  box-sizing: border-box;
+  padding: 1%;
 }
 
 .merge-button {
@@ -54,7 +53,6 @@ footer {
 .sidebar-li {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
   cursor: pointer; /* Make it look clickable */
   padding: 5px 10px;
   border-radius: 25px; /* Rounded border */
@@ -68,26 +66,7 @@ footer {
   color: #fff; /* Text color on hover */
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%; /* Full width on smaller screens */
-    height: auto; /* Adjust height to fit content */
-  }
 
-  .sidebar h1 {
-    font-size: 1.3em; /* Smaller font size */
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  .sidebar li {
-    padding: 5px 8px;
-  }
-
-  .upgrade-section {
-    max-width: 100%; /* Allow full width on smaller screens */
-  }
-}
 
 .insights-modal {
   word-wrap: break-word; /* Ensure long words break onto the next line */
