@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import ChatBox from '../components/ChatBox';
 import Footer from '../components/Footer';
-import { Modal, Button } from 'react-bootstrap';
-import * as XLSX from 'xlsx';
+import { Form } from 'react-bootstrap';
 
 function MergeExcelGPT() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false)
-    const [merged, setMerged] = useState(null)
-    const [showModal, setShowModal] = useState(false)
+    const [userMessage, setUserMessage] = useState('');
+    const [chatHistory, setChatHistory] = useState([])
+
+    const handleSendMessage = async () => {
+        if (!userMessage.trim()) return;
+
+        const newMessage = {
+            sender: 'user',
+            text: userMessage
+        }
+         
+        setUserMessage('');
+        const updatedChatHistory = [...chatHistory, newMessage]  
+        setChatHistory(updatedChatHistory);
+
+        await axios.post('https://testagent1-eb208e96c27e.herokuapp.com/chat-gpt', {
+            message: userMessage,
+            chatHistory: updatedChatHistory
+        })
+        .then(response => {
+            const botMessage = {
+                sender: 'bot',
+                text: response.data.reply
+            }
+        
+            setChatHistory(prevChatHistory => [...prevChatHistory, botMessage]); 
+        })
+        .catch(error => {
+            setError(error);
+        });
+    }
 
     const handleFileChange = async (e) => {
         const files = e.target.files;
-        if (files.length < 2) {
+        if (files.length !== 2) {
             alert('Please select two files to merge.');
             return;
         }
@@ -32,37 +59,31 @@ function MergeExcelGPT() {
             const response = await axios.post('https://testagent1-eb208e96c27e.herokuapp.com/merge-excel', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                }
+                },
+                responseType: 'blob' 
             });
             setLoading(false)
             setError(null)
-            setMerged(response.data.merge_result)
-            setShowModal(true)
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'merged_data.xlsx');
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+            // setMerged(response.data.merge_result)
+            // setShowModal(true)
         } catch (error) {
             setLoading(false)
             if (error.response) {
-                // Server responded with a status other than 2xx
                 setError(`Server Error: ${error.response.data.error}`);
             } else if (error.request) {
-                // Request was made but no response received
                 setError('Network Error: No response from server');
             } else {
-                // Something happened in setting up the request
                 setError(`Request Error: ${error.message}`);
             }
         }
-    };
-
-    const downloadResult = (result) => {
-        const rows = result
-            .split('\n')
-            .filter(row => row.trim()) 
-            .map(row => row.split('|').slice(1, -1).map(col => col.trim())); 
-    
-        const ws = XLSX.utils.aoa_to_sheet(rows); 
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Merged Data');
-        XLSX.writeFile(wb, '/merge_result.xlsx'); 
     };
 
     const gptName = "Merge Excel GPT";
@@ -71,59 +92,29 @@ function MergeExcelGPT() {
         <div className="main-content" style={{height:'100vh', minHeight: "800px"}}>
             <h2 style={{ marginTop:'4%', textAlign: 'left', fontSize: '1.8vw' }}>Merge Excel GPT</h2>
 
+           <div style={{ margin: '3%', fontSize: '1.2vw', color: '#333', maxHeight: '80vh', overflowY: 'auto' }}>
+                {
+                    chatHistory.map((message, index) => (
+                        <div key={index} style={{ textAlign: message.sender === 'user' ? 'right' : 'left' }}>
+                            <div 
+                                style={{ 
+                                    display: 'inline-block', 
+                                    padding: '10px', 
+                                    borderRadius: '10px', 
+                                    backgroundColor: message.sender === 'user' ? '#d1e7dd' : '#f8d7da', 
+                                    margin: '5px 0',
+                                    maxWidth: '90%' 
+                                }}
+                            >
+                                {typeof message.text === 'string' ? message.text : JSON.stringify(message.text)}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
             <div className="merge-options" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto', marginBottom: '20px' }}>
-            {loading ? (
-                    <div className="spinner"></div>
-                ) : (
-                    merged && (
-                        <Modal show={showModal} onHide={() => setShowModal(false)}>
-                            <Modal.Dialog style={{ maxWidth: '90%' }}> {/* Adjust modal width */}
-                                <Modal.Header closeButton style={{ width: '100%' }}>
-                                    <Modal.Title>Merge Result</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                {merged.split('\n')[0].split('|').slice(1, -1).map((header, index) => (
-                                                    <th key={index} style={{ whiteSpace: 'nowrap', padding: '8px' }}>
-                                                        {header.trim()}
-                                                    </th>
-                                                ))}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {merged
-                                                .split('\n')
-                                                .slice(2) // Skip header row
-                                                .filter(row => row.trim()) // Filter out any empty rows
-                                                .map((row, rowIndex) => {
-                                                    const columns = row.split('|').slice(1, -1).map(column => column.trim());
-                                                    return (
-                                                        <tr key={rowIndex}>
-                                                            {columns.map((col, colIndex) => (
-                                                                <td key={colIndex} style={{ padding: '8px', textAlign: 'left' }}>
-                                                                    {col}
-                                                                </td>
-                                                            ))}
-                                                        </tr>
-                                                    );
-                                                })}
-                                        </tbody>
-                                    </table>
-                                </Modal.Body>
-                                <Modal.Footer style={{ width: '100%' }}>                                    
-                                    <Button variant="primary" onClick={() => downloadResult(merged)}>
-                                        Download Result
-                                    </Button>
-                                    <Button variant="secondary" onClick={() => setShowModal(false)}>
-                                        Close
-                                    </Button>
-                                </Modal.Footer>
-                            </Modal.Dialog>
-                        </Modal>
-                    )
-                )}
+            {loading && (<div className="spinner"></div>)}
                 <input
                     type="file"
                     id="file-input"
@@ -156,7 +147,22 @@ function MergeExcelGPT() {
 
 
             {error && <div className="error-message" style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>{error}</div>}
-            <ChatBox gptName={gptName}/>
+            
+            <div style={{ marginTop: '10px', width: '100%'}}>
+                <Form.Control
+                    type='text'
+                    placeholder={`Chat with ${gptName}`}
+                    value={userMessage}
+                    onChange={(e) => setUserMessage(e.target.value)}
+                    onKeyDown={(e) => e.key==='Enter' && handleSendMessage()}
+                    style={{
+                        width: '100%',
+                        fontSize: '1.2vw',
+                        borderRadius: '10px'
+                    }}
+                />
+            </div>
+
             <Footer />
         </div>
     );

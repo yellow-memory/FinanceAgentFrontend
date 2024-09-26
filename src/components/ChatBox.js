@@ -1,9 +1,11 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 function ChatBox({gptName}) {
+
     return (
-        <div style={{ marginTop: '10px', width: '100%', display: 'flex', justifyContent: 'center', marginLeft:'auto', marginRight:'auto'}}>
-            <button
+        <div style={{ marginTop: '10px', width: '100%', display: 'flex', justifyContent: 'center'}}>
+            <Button
                 style={{
                     height: '100px',
                     borderRadius: '10px',
@@ -16,7 +18,7 @@ function ChatBox({gptName}) {
                 }}
             >
                 Chat with {gptName}
-            </button>
+            </Button>
         </div>
     );
 }
