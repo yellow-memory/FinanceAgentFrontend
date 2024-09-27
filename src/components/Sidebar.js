@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ReactComponent as MyIcon } from '../assets/icons/1.svg';
 import { ReactComponent as ChartIcon } from '../assets/icons/chart-simple-solid.svg';

@@ -11,7 +11,8 @@ function Footer() {
                 justifyContent: 'space-between', 
                 marginLeft: 'auto', 
                 marginRight: 'auto', 
-                marginBottom: '10px'
+                marginBottom: '10px',
+                fontSize: '1vw'
         }}>
             <span>Data Privacy</span>
             <span>AI Disclaimer</span>

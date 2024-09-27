@@ -1,41 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Footer from '../components/Footer';
-import { Form } from 'react-bootstrap';
+import ChatBox from '../components/ChatBox';
+import ChatHistory from '../components/ChatHistory';
 
 function MergeExcelGPT() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false)
-    const [userMessage, setUserMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([])
 
-    const handleSendMessage = async () => {
-        if (!userMessage.trim()) return;
-
-        const newMessage = {
-            sender: 'user',
-            text: userMessage
-        }
-         
-        setUserMessage('');
-        const updatedChatHistory = [...chatHistory, newMessage]  
-        setChatHistory(updatedChatHistory);
-
-        await axios.post('https://testagent1-eb208e96c27e.herokuapp.com/chat-gpt', {
-            message: userMessage,
-            chatHistory: updatedChatHistory
-        })
-        .then(response => {
-            const botMessage = {
-                sender: 'bot',
-                text: response.data.reply
-            }
-        
-            setChatHistory(prevChatHistory => [...prevChatHistory, botMessage]); 
-        })
-        .catch(error => {
-            setError(error);
-        });
+    const handleChatUpdate = (newChatHistory, newError) => {
+        setChatHistory(newChatHistory)
+        setError(newError)
     }
 
     const handleFileChange = async (e) => {
@@ -92,26 +68,7 @@ function MergeExcelGPT() {
         <div className="main-content" style={{height:'100vh', minHeight: "800px"}}>
             <h2 style={{ marginTop:'4%', textAlign: 'left', fontSize: '1.8vw' }}>Merge Excel GPT</h2>
 
-           <div style={{ margin: '3%', fontSize: '1.2vw', color: '#333', maxHeight: '80vh', overflowY: 'auto' }}>
-                {
-                    chatHistory.map((message, index) => (
-                        <div key={index} style={{ textAlign: message.sender === 'user' ? 'right' : 'left' }}>
-                            <div 
-                                style={{ 
-                                    display: 'inline-block', 
-                                    padding: '10px', 
-                                    borderRadius: '10px', 
-                                    backgroundColor: message.sender === 'user' ? '#d1e7dd' : '#f8d7da', 
-                                    margin: '5px 0',
-                                    maxWidth: '90%' 
-                                }}
-                            >
-                                {typeof message.text === 'string' ? message.text : JSON.stringify(message.text)}
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
+            <ChatHistory chatHistory={chatHistory}/>
 
             <div className="merge-options" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto', marginBottom: '20px' }}>
             {loading && (<div className="spinner"></div>)}
@@ -148,20 +105,10 @@ function MergeExcelGPT() {
 
             {error && <div className="error-message" style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>{error}</div>}
             
-            <div style={{ marginTop: '10px', width: '100%'}}>
-                <Form.Control
-                    type='text'
-                    placeholder={`Chat with ${gptName}`}
-                    value={userMessage}
-                    onChange={(e) => setUserMessage(e.target.value)}
-                    onKeyDown={(e) => e.key==='Enter' && handleSendMessage()}
-                    style={{
-                        width: '100%',
-                        fontSize: '1.2vw',
-                        borderRadius: '10px'
-                    }}
-                />
-            </div>
+            <ChatBox
+                gptName={gptName}
+                onChatUpdate={handleChatUpdate}
+            />
 
             <Footer />
         </div>

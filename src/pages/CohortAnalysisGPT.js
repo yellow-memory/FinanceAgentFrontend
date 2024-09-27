@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Footer from '../components/Footer';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
+import ChatBox from '../components/ChatBox';
+import ChatHistory from '../components/ChatHistory';
 
 // Modal styles
 const customStyles = {
@@ -9,7 +11,7 @@ const customStyles = {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'flex-start', // Align items to the top
+        alignItems: 'flex-start',
         padding: '20px',
         top: '50%',
         left: '50%',
@@ -20,7 +22,7 @@ const customStyles = {
         width: '80%',
         height: '80%',
         boxSizing: 'border-box',
-        position: 'relative' // To position the close button inside content
+        position: 'relative'
     }
 };
 
@@ -30,36 +32,11 @@ function CohortAnalysisGPT() {
     const [cohort, setCohort] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showExampleModal, setShowExampleModal] = useState(false);
-    const [userMessage, setUserMessage] = useState('');
     const [chatHistory, setChatHistory] = useState([])
 
-    const handleSendMessage = async () => {
-        if (!userMessage.trim()) return;
-
-        const newMessage = {
-            sender: 'user',
-            text: userMessage
-        }
-         
-        setUserMessage('');
-        const updatedChatHistory = [...chatHistory, newMessage]  
-        setChatHistory(updatedChatHistory);
-
-        await axios.post('https://testagent1-eb208e96c27e.herokuapp.com/chat-gpt', {
-            message: userMessage,
-            chatHistory: updatedChatHistory
-        })
-        .then(response => {
-            const botMessage = {
-                sender: 'bot',
-                text: response.data.reply
-            }
-        
-            setChatHistory(prevChatHistory => [...prevChatHistory, botMessage]); 
-        })
-        .catch(error => {
-            setError(error);
-        });
+    const handleChatUpdate = (newChatHistory, newError) => {
+        setChatHistory(newChatHistory)
+        setError(newError)
     }
 
     const handleFileChange = async (e) => {
@@ -112,26 +89,7 @@ function CohortAnalysisGPT() {
             <h2 style={{ marginTop:'4%', textAlign: 'left', fontSize: '1.8vw' }}>Cohort Analysis GPT</h2>
             {/* {(image && <img src={image} alt="Cohort Analysis Result" style={{ width: '100%', maxHeight: '50vh', objectFit: 'contain' }} />)} */}
 
-            <div style={{ margin: '3%', fontSize: '1.2vw', color: '#333', maxHeight: '80vh', overflowY: 'auto' }}>
-                {
-                    chatHistory.map((message, index) => (
-                        <div key={index} style={{ textAlign: message.sender === 'user' ? 'right' : 'left' }}>
-                            <div 
-                                style={{ 
-                                    display: 'inline-block', 
-                                    padding: '10px', 
-                                    borderRadius: '10px', 
-                                    backgroundColor: message.sender === 'user' ? '#d1e7dd' : '#f8d7da', 
-                                    margin: '5px 0',
-                                    maxWidth: '90%' 
-                                }}
-                            >
-                                {typeof message.text === 'string' ? message.text : JSON.stringify(message.text)}
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
+            <ChatHistory chatHistory={chatHistory}/>
 
             <div className="merge-options" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 'auto', marginBottom: '20px' }}>
             {loading ? (
@@ -190,20 +148,10 @@ function CohortAnalysisGPT() {
 
             {error && <div className="error-message" style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>{error}</div>}
             
-            <div style={{ marginTop: '10px', width: '100%'}}>
-                <Form.Control
-                    type='text'
-                    placeholder={`Chat with ${gptName}`}
-                    value={userMessage}
-                    onChange={(e) => setUserMessage(e.target.value)}
-                    onKeyDown={(e) => e.key==='Enter' && handleSendMessage()}
-                    style={{
-                        width: '100%',
-                        fontSize: '1.2vw',
-                        borderRadius: '10px'
-                    }}
-                />
-            </div>
+            <ChatBox
+                gptName={gptName}
+                onChatUpdate={handleChatUpdate}
+            />
             
             <Footer />
 
